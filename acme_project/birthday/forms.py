@@ -21,10 +21,12 @@ class BirthdayForm(forms.ModelForm):
         }
 
     def clean_first_name(self):
+        """Clean first name."""
         first_name = self.cleaned_data['first_name']
         return first_name.split()[0]
-    
+
     def clean(self):
+        """Clean data."""
         super().clean()
         first_name = self.cleaned_data['first_name']
         last_name = self.cleaned_data['last_name']

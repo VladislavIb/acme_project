@@ -17,6 +17,8 @@ class Birthday(models.Model):
     image = models.ImageField('Фото', upload_to='birthdays_images', blank=True)
 
     class Meta:
+        """Birthday model meta."""
+
         constraints = (
             models.UniqueConstraint(
                 fields=('first_name', 'last_name', 'birthday'),
