@@ -1,5 +1,6 @@
 """Birthday model."""
 from django.db import models
+from django.urls import reverse
 
 from .validators import real_age
 
@@ -25,3 +26,7 @@ class Birthday(models.Model):
                 name='Unique person constraint'
             ),
         )
+
+    def get_absolute_url(self):
+        """Get absolute url."""
+        return reverse('birthday:detail', kwargs={"pk": self.pk})
