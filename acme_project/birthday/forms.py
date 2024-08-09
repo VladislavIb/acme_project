@@ -16,7 +16,7 @@ class BirthdayForm(forms.ModelForm):
         """Birthday form meta."""
 
         model = Birthday
-        fields = '__all__'
+        exclude = ('authour',)
         widgets = {
             'birthday': forms.DateInput(attrs={'type': 'date'}),
         }
