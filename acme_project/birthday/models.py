@@ -37,3 +37,23 @@ class Birthday(models.Model):
     def get_absolute_url(self):
         """Get absolute url."""
         return reverse('birthday:detail', kwargs={"pk": self.pk})
+
+
+class Congratulation(models.Model):
+    """Congratulation model."""
+
+    text: models.TextField = models.TextField('Текст поздравления')
+    birthday: models.ForeignKey = models.ForeignKey(
+        Birthday,
+        on_delete=models.CASCADE,
+        related_name='congratulations',
+    )
+    created_at: models.DateTimeField = models.DateTimeField(auto_now_add=True)
+    author: models.ForeignKey = models.ForeignKey(
+        User, on_delete=models.CASCADE
+    )
+
+    class Meta:
+        """Congratulation model meta."""
+
+        ordering = ('created_at',)
