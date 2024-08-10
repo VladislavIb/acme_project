@@ -9,6 +9,16 @@ from .validators import real_age
 User = get_user_model()
 
 
+class Tag(models.Model):
+    """Tag model."""
+
+    tag: models.CharField = models.CharField('Тег', max_length=20)
+
+    def __str__(self):
+        """__str__."""
+        return self.tag
+
+
 class Birthday(models.Model):
     """Birthday model."""
 
@@ -22,6 +32,12 @@ class Birthday(models.Model):
     image = models.ImageField('Фото', upload_to='birthdays_images', blank=True)
     author: models.ForeignKey = models.ForeignKey(
         User, verbose_name='Автор записи', on_delete=models.CASCADE, null=True
+    )
+    tags: models.ManyToManyField = models.ManyToManyField(
+        Tag,
+        verbose_name='Теги',
+        blank=True,
+        help_text='Удерживайте Ctrl для выбора нескольких вариантов',
     )
 
     class Meta:
